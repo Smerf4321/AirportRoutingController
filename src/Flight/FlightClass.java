@@ -21,9 +21,10 @@ public class FlightClass implements FlightState{
     States state;
     FlightState fs = new InFlight();
     String destination;
+    boolean clearance;
     
     
-    FlightClass(Plane plane, int passengers, boolean supplied, int fuel, boolean crewed, States state, String destination){
+    FlightClass(Plane plane, int passengers, boolean supplied, int fuel, boolean crewed, States state, String destination, boolean clearance){
         
         this.plane = plane;
         this.passengers = passengers;
@@ -31,6 +32,7 @@ public class FlightClass implements FlightState{
         this.fuel = fuel;
         this.crewed = crewed;
         this.destination = destination;
+        this.clearance = clearance;
         
         if (state == States.INFLIGHT){
             this.state = state;
@@ -42,5 +44,28 @@ public class FlightClass implements FlightState{
         else {
             System.out.println("Error. Plane can only be added to the system if it's either arriving or parked.");
         }  
+    }
+    
+    public void giveclearance (){
+        clearance = true;
+    }
+    
+    public void revokeclearance(){
+        clearance = false;
+    }
+
+    @Override
+    public void checkClearance() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public void taxingGuidance() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public void readyCheck() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 }

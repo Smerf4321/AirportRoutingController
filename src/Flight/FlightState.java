@@ -10,7 +10,7 @@ package Flight;
  * @author v8243060
  */
 public interface FlightState {
-    void checkClerance();
+    void checkClearance();
     void taxingGuidance();
     void readyCheck();
     
