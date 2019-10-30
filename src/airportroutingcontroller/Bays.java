@@ -3,12 +3,19 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Flight;
+package airportroutingcontroller;
+
+import java.util.HashMap;
 
 /**
  *
  * @author v8243060
  */
-public interface FlightState {
-    void readyCheck(FlightClass flight);
+public class Bays { 
+   public static HashMap<Integer,Boolean> bays;
+   static {
+       bays = new HashMap<>();
+       bays.put(1, false);
+   }
 }
+

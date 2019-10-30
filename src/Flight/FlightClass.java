@@ -5,7 +5,9 @@
  */
 package Flight;
 
+import Planes.PassangerPlane;
 import Planes.Plane;
+import java.util.HashMap;
 
 /**
  *
@@ -13,23 +15,29 @@ import Planes.Plane;
  */
 public class FlightClass implements FlightState{
     
-    Plane plane;
-    int passengers;
-    boolean supplied;
-    int fuel;
-    boolean crewed;
-    States state;
-    FlightState fs = new InFlight();
-    String destination;
-    boolean clearance;
+    private States state;
+    protected PassangerPlane plane;
+    private FlightState fs = new InFlight();
+    
+    private int flightNumber;
+    private int bookedPassengers;
+    private HashMap<String, String> passangerList;
+    private String destination;
+    
+    private boolean supplied;
+    private int currentFuel;
+    private int minimumFuel = 50;
+    private boolean crewed;
+    private boolean clearance;
+    private boolean preventFurtherAction;
     
     
-    FlightClass(Plane plane, int passengers, boolean supplied, int fuel, boolean crewed, States state, String destination, boolean clearance){
+    FlightClass(PassangerPlane plane, int passengers, boolean supplied, int fuel, boolean crewed, States state, String destination, boolean clearance){
         
         this.plane = plane;
-        this.passengers = passengers;
+        this.bookedPassengers = passengers;
         this.supplied = supplied;
-        this.fuel = fuel;
+        this.currentFuel = fuel;
         this.crewed = crewed;
         this.destination = destination;
         this.clearance = clearance;
@@ -46,26 +54,42 @@ public class FlightClass implements FlightState{
         }  
     }
     
-    public void giveclearance (){
+    public void giveClearance (){
         clearance = true;
     }
     
-    public void revokeclearance(){
+    public void revokeClearance(){
         clearance = false;
     }
-
-    @Override
-    public void checkClearance() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    
+    public boolean getClearance(){
+        return clearance;
+    }
+    
+    public int getFlightNumber(){
+        return flightNumber;
+    }
+    
+    public int getCurrentFuel(){
+        return currentFuel;
+    }
+    
+    public int getMinimumFuel(){
+        return minimumFuel;
+    }
+    
+    public int getMaximumFuel(){
+        plane.getMaxFuel();
     }
 
-    @Override
-    public void taxingGuidance() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public void setState(FlightState state){
+        fs = state;
     }
-
+    
     @Override
-    public void readyCheck() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public void readyCheck(FlightClass flight) {
+        if (!preventFurtherAction){
+            fs.readyCheck(this);
+        }
     }
 }

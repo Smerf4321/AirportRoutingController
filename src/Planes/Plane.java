@@ -13,7 +13,7 @@ package Planes;
  */
 public abstract class Plane {
     
-    String planeNumber;
+    String serialNumber;
     boolean priority;
     String model;
     String company;

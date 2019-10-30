@@ -11,6 +11,10 @@ package Planes;
  * @author v8243060
  */
 public class PassangerPlane extends Plane{
-    int seats;
-    int fuelTankSize;
+    int maximumPassengers;
+    int maximumFuel;
+
+    public int getMaxFuel(){
+        return maximumFuel;
+    }
 }

@@ -10,5 +10,12 @@ package Flight;
  * @author v8243060
  */
 public class Parked implements FlightState {
+
+    @Override
+    public void readyCheck(FlightClass flight) {
+        if (flight.getCurrentFuel() < flight.getMinimumFuel()){
+            
+        }
+    }
     
 }
