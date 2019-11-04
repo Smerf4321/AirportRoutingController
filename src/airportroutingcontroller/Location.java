@@ -4,9 +4,9 @@
 package airportroutingcontroller;
 import java.util.HashMap;
 /**
- *
+ * this class stores the location of the airport
  * @author v8243060
  */
 public class Location {
-    public static String Location = "London";
+    public final static String Location = "London";
 }

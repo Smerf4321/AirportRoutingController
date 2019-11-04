@@ -6,16 +6,16 @@
 package Flight;
 
 /**
- *
+ * This enum stores all the states the plane can go through. 
  * @author v8243060
  */
 public enum States {
     INFLIGHT,
     WAITING,
     PARKED,
-    REFUELED,
-    RESUPPLIED,
-    CREWED,
-    DISEMBARKED,
-    ALLABOARD
+    LOWFUEL,
+    LOWSUPPLIES,
+    NOCREWONBOARD,
+    NOPASSENGERSONBOARD,
+    PASSENGERSONBOARD
 }

@@ -6,10 +6,15 @@ package airportroutingcontroller;
 import java.util.HashMap;
 
 /**
- *
+ * Stores the arbitrary values for the bays the airport would have
  * @author v8243060
  */
 public class Bays { 
+    
+    /**
+     * A static HashMap accessible from any part of the system.
+     * Stores bay number as integer and whether it's occupied or not as boolean
+     */
    public static HashMap<Integer,Boolean> bays;
    static {
        bays = new HashMap<>();

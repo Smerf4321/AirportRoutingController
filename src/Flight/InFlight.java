@@ -9,14 +9,18 @@ import airportroutingcontroller.Runways;
 import java.util.Iterator;
 import java.util.Map;
 /**
- *
+ * This state class represents the behaviour of the flight while it is in the air
  * @author v8243060
  */
 public class InFlight implements FlightState {
     
-    boolean runwayOpen = false;
+    private boolean runwayOpen = false;
     
-    public void cleranceCheck(FlightClass flight) {
+    /**
+     * This method checks whether the flight has clearance to land/depart
+     * @param flight instantiated FlightClass, should be passed automatically by readyCheck of this class
+     */
+    private void cleranceCheck(FlightClass flight) {
         if (runwayOpen){
             flight.giveClearance();
             System.out.println("You have clearance flight " + flight.getFlightNumber());
@@ -26,11 +30,16 @@ public class InFlight implements FlightState {
         }
     }
 
+    /**
+     * readyCheck override specific for the InFlight class
+     * It checks if there is a free runway and if the flight has the clearance to land/depart
+     * @param flight instantiated FlightClass
+     */
     @Override
     public void readyCheck(FlightClass flight) {
         cleranceCheck(flight);
         
-        
+        //Checks for a free runway
         for (Map.Entry r : Runways.runways.entrySet()){
             if (!((Boolean)r.getValue()).booleanValue()){
                 System.out.println("Runway "+ r.getKey() + " is clear");
@@ -40,6 +49,7 @@ public class InFlight implements FlightState {
             }
         }
         
+        //Gets the clearance to land/depart
         if (flight.getClearance()){
             System.out.println("Flight " + flight.getFlightNumber() + " landing");
             flight.setState(new Waiting());

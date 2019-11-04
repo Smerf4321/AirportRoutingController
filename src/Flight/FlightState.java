@@ -6,9 +6,13 @@
 package Flight;
 
 /**
- *
+ * Interface that gives the states and the FlightClass the readyCheck method
  * @author v8243060
  */
 public interface FlightState {
+    /**
+     * A method to be overridden by the classes that implement the interface
+     * @param flight instantiated FlightClass 
+     */
     void readyCheck(FlightClass flight);
 }
