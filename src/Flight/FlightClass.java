@@ -21,6 +21,7 @@ public class FlightClass implements FlightState{
     
     private int flightNumber;
     private int bookedPassengers;
+    private int passenegersOnboard;
     private HashMap<String, String> passangerList;
     private String destination;
     
@@ -79,11 +80,55 @@ public class FlightClass implements FlightState{
     }
     
     public int getMaximumFuel(){
-        plane.getMaxFuel();
+        return plane.getMaxFuel();
+    }
+    
+    public String getDestination(){
+        return destination;
     }
 
     public void setState(FlightState state){
         fs = state;
+    }
+    
+    public boolean isSupplied(){
+        return supplied;
+    }
+    
+    public boolean isCrewed(){
+        return crewed;
+    }
+    
+    public void crewDisembarked(){
+        crewed = false;
+    }
+    
+    public void crewEmbarked(){
+        crewed = true;
+    }
+    
+    public int getPassengersBooked(){
+        return bookedPassengers;
+    }
+    
+    public void passengersDisembarked(){
+        passenegersOnboard=0;
+    }
+    
+    public void passengersEmbarked(){
+        passenegersOnboard = bookedPassengers;
+    }
+    
+    public int getPassengersOnboard(){
+        return passenegersOnboard;
+    }
+    
+    public void refuel(){
+        currentFuel = plane.getMaxFuel();
+    }
+    
+    public void resupply(){
+        supplied = true;
     }
     
     @Override

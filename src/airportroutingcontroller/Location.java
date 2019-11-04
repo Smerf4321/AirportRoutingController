@@ -2,17 +2,11 @@
  * This package stores the arbitrary values that imitate other parts of the future system.
  */
 package airportroutingcontroller;
-
 import java.util.HashMap;
-
 /**
  *
  * @author v8243060
  */
-public class Runways {
-    public static HashMap<String, Boolean> runways;
-    static {
-        runways = new HashMap<>();
-        runways.put("8L", false);
-    }
+public class Location {
+    public static String Location = "London";
 }
