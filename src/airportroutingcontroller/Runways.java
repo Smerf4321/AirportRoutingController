@@ -20,4 +20,8 @@ public class Runways {
         runways = new HashMap<>();
         runways.put("8L", false);
     }
+    
+    public static void changeRunwayTest(){
+        runways.replace("8L", true);
+    }
 }

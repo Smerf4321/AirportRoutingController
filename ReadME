@@ -5,6 +5,9 @@ Input numbers 1-3 in the command line to test various methods in different stage
 2 - departing()
 3 - readyCheck()
 
+Before running the presentation uncomment the giveClearance() in departing
+method in Waiting class!!!
+
 arportroutingcontroller package stores classes that imitate the rest of the 
 overall system that is not implemented here. 
 

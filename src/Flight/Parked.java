@@ -32,14 +32,15 @@ public class Parked implements FlightState {
             //of the flight to PassengersOnboard
             if(flight.getPassengersOnboard() > 0){
                 System.out.println("Passengers onboard");
-                flight.setState(new PassangersOnboard());
-                flight.readyCheck(flight);
+                flight.testOutput += ("PO");
+                flight.setState(new PassengersOnboard());
             }
             
             //if the current fuel is lower than minimum fuel the method will 
             //change the state of the flight to PassengersOnboard
             else if (flight.getCurrentFuel() < flight.getMinimumFuel()){
                 System.out.println("Low Fuel");
+                flight.testOutput += ("F");
                 flight.setState(new LowFuel());
             }
             
@@ -47,6 +48,7 @@ public class Parked implements FlightState {
             //change the state of the flight to LowSupplies
             else if (!flight.isSupplied()){
                 System.out.println("Low Supplies");
+                flight.testOutput += ("S");
                 flight.setState(new LowSupplies());
             }
             
@@ -54,6 +56,7 @@ public class Parked implements FlightState {
             //is full on fuel, is supplied, crewed and passengers and onboard
             else {
                 System.out.println("Ready");
+                flight.testOutput += ("1");
                 flight.departing(flight);
             }
         }
@@ -63,16 +66,18 @@ public class Parked implements FlightState {
             flight.revokeClearance();
             
             //if there are passangers booked for the flight the method will 
-            //change the state of the flight to NoPassangersOnboard
+            //change the state of the flight to NoPassengersOnboard
             if (flight.getPassengersBooked() > 0){
                 System.out.println("Passengere ready to board");
-                flight.setState(new NoPassangersOnboard());
+                flight.testOutput += ("PB");
+                flight.setState(new NoPassengersOnboard());
             }
             
             //if the current fuel is lower than minimum fuel the method will 
             //change the state of the flight to PassengersOnboard
             else if (flight.getCurrentFuel() < flight.getMinimumFuel()){
                 System.out.println("Low Fuel");
+                flight.testOutput += ("F");
                 flight.setState(new LowFuel());
             
              //if the flight is not supplied the method will 
@@ -80,13 +85,15 @@ public class Parked implements FlightState {
             }
             else if (!flight.isSupplied()){
                 System.out.println("Low Supplies");
+                flight.testOutput += ("S");
                 flight.setState(new LowSupplies());
             }
             
             //should fire only when the plane is ready to depart e.g. 
             //is full on fuel, is supplied, crewed and passengers and onboard
             else {
-                System.out.println("Departing");
+                System.out.println("Ready");
+                flight.testOutput += ("1");
                 flight.departing(flight);
             }
         }
@@ -110,6 +117,7 @@ public class Parked implements FlightState {
         for (Map.Entry r : Runways.runways.entrySet()){
             if (!((Boolean)r.getValue()).booleanValue()){
                 System.out.println("Proceed to " + r.getKey() + " runway");
+                flight.testOutput += ("1");
                 runwayOpen = true;
                 r.setValue(new Boolean(true));
                 flight.setRunway((String)r.getKey());
@@ -120,6 +128,7 @@ public class Parked implements FlightState {
         //in case there are no empty runways
         if (!runwayOpen){
             System.out.println("There aren't any empty runways flight  " + flight.getFlightNumber());
+            flight.testOutput += ("0");
         }
     }
     

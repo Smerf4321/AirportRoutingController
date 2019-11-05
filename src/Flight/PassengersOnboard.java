@@ -6,21 +6,21 @@
 package Flight;
 
 /**
- * This class represents the behaviour of the flight while there are 
- * no passengers on-board
+ * This class represents the behaviour of the flight while passengers are on-board
  * @author v8243060
  */
-public class NoPassangersOnboard implements FlightState {
-    
+public class PassengersOnboard implements FlightState {
+
     /**
-     * readyCheck override specific for the NoPassengersOnboard class
-     * calls the passenegersEmbarked method of the flight 
+     * readyCheck override specific for the PassengersOnboard class
+     * calls passengersDisembarked method of the flight
      * @param flight instantiated FlightClass
      */
     @Override
     public void readyCheck(FlightClass flight) {
-        System.out.println("Passengers embarking");
-        flight.passengersEmbarked();
+        System.out.println("Passengers disembarking");
+        flight.testOutput += ("Pd");
+        flight.passengersDisembarked();
         flight.setState(new Parked());
         
         //commented out for presentation purposes!

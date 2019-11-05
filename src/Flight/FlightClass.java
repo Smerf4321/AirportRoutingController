@@ -97,6 +97,8 @@ public class FlightClass implements FlightState{
      */
     private String runway;
     
+    public String testOutput = "";
+    
     /**
      * Creates the FlightClass object which represents the flight
      * @param flightNumber Identification of the flight
@@ -313,6 +315,10 @@ public class FlightClass implements FlightState{
         return runway;
     }
     
+    public void preventFurtherActionTest(){
+        preventFurtherAction = true;
+    }
+    
     /**
      * Checks if the plane is ready
      * It calls the readyCheck method of the current flight state class
@@ -323,6 +329,9 @@ public class FlightClass implements FlightState{
         //checks if there is an emergency stop activated
         if (!preventFurtherAction){
             fs.readyCheck(this);
+        }
+        else {
+            flight.testOutput += ("0");
         }
     }
 
@@ -336,6 +345,9 @@ public class FlightClass implements FlightState{
         if (!preventFurtherAction){
             fs.arriving(this);
         }
+        else {
+            flight.testOutput += ("0");
+        }
     }
 
     /**
@@ -347,6 +359,9 @@ public class FlightClass implements FlightState{
     public void departing(FlightClass flight) {
         if (!preventFurtherAction){
             fs.departing(this);
+        }
+        else {
+            flight.testOutput += ("0");
         }
     }
 }

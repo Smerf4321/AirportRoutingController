@@ -20,5 +20,10 @@ public class Bays {
        bays = new HashMap<>();
        bays.put(1, false);
    }
+   
+   public static void changeBayTest(){
+        bays.replace(1, true);
+    }
 }
+
 

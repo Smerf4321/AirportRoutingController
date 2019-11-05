@@ -19,6 +19,7 @@ public class NoCrewOnboard implements FlightState {
     @Override
     public void readyCheck(FlightClass flight) {
         System.out.println("Crew Embarking");
+        flight.testOutput += ("C");
         flight.crewEmbarked();
         flight.setState(new Parked());
         

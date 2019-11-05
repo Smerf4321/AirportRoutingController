@@ -19,6 +19,7 @@ public class LowSupplies implements FlightState {
     @Override
     public void readyCheck(FlightClass flight) {
         System.out.println("Resuppling");
+        flight.testOutput += ("S");
         flight.resupply();
         flight.setState(new Parked());
         
