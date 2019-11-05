@@ -26,8 +26,9 @@ public class Waiting implements FlightState {
      * This method displays the taxing instructions for the arriving flight
      * @param bay Integer, bay the flight is taxing to
      */
-    private void taxingGuidance(Integer bay){
+    private void taxingGuidance(FlightClass flight, Integer bay){
         System.out.println("Proceed to bay "+ bay);
+        flight.testOutput = ("1");
     }
 
     /**
@@ -42,17 +43,19 @@ public class Waiting implements FlightState {
         boolean bayFound = false;
         for (Map.Entry r : Bays.bays.entrySet()){
             if (!((Boolean)r.getValue()).booleanValue()){
-                taxingGuidance((Integer)r.getKey());
+                taxingGuidance(flight, (Integer)r.getKey());
                 bayFound = true;
-                r.setValue(new Boolean(true));
+                System.out.println(r.getValue());
                 flight.setBay((Integer)r.getKey());
                 flight.setState(new Parked());
                 break;
             }
         }
+
         //in case the bay was not found the error is displayed
         if (bayFound = false){
             System.out.println("ERROR - NO EMPTY BAYS FOUND");
+            flight.testOutput = ("0");
         }
         else {
             Bays.bays.replace(flight.getBay(), (new Boolean (false)));
@@ -67,15 +70,17 @@ public class Waiting implements FlightState {
     @Override
     public void departing(FlightClass flight) {
         
-        //presentation sake
-        flight.giveClearance();
+        //presentation sake UNCOMMENT FOR PRESENTATION!
+        //flight.giveClearance();
         
         if (flight.getClearance()){
             System.out.println("You can depart");
+            flight.testOutput += ("1");
             flight.setState(new InFlight());
         }
         else {
             System.out.println("You don't have clearance to depart yet");
+            flight.testOutput += ("0");
         }
     }
 }
