@@ -29,4 +29,13 @@ public class PassengerPlane extends Plane{
     public int getMaxFuel(){
         return maximumFuel;
     }
+    
+    public PassengerPlane(String serialNumber, boolean priority, String model, String company, int maxPass, int maxFuel){
+        this.serialNumber = serialNumber;
+        this.priority = priority;
+        this.model = model;
+        this.company = company;
+        this.maximumPassengers = maxPass;
+        this.maximumFuel = maxFuel;
+    }
 }

@@ -1,0 +1,16 @@
+For presentation purposes the main class is the AirportRoutingController.java.
+To run this presentation you need to run the project itself.
+Input numbers 1-3 in the command line to test various methods in different stages.
+1 - arriving()
+2 - departing()
+3 - readyCheck()
+
+arportroutingcontroller package stores classes that imitate the rest of the 
+overall system that is not implemented here. 
+
+Planes package is a package that imitates the plane classes that would be 
+stored within a database.
+
+Flight package stores the implementation of the State Pattern with regards to
+flight management. It stores the main FlightClass and all it's states along 
+with the interface FlightState they all implement.

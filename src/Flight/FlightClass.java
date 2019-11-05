@@ -102,15 +102,14 @@ public class FlightClass implements FlightState{
      * @param flightNumber Identification of the flight
      * @param plane Plane that is associated with the flight
      * @param bookedPassengers Number of passengers booked for the flight
-     * @param passangersOnboard Number of passengers currently on-board
+     * @param passenegersOnboard Number of passengers currently on-board
      * @param supplied Whether the plane has supplies 
      * @param fuel Current fuel 
      * @param crewed Whether the plane is crewed
      * @param state Current state (can be only InFlight or Parked)
      * @param destination String name of the airport thats the flight destination
-     * @param clearance Whether the plane has clearance to land/takeoff
      */
-    FlightClass(int flightNumber, PassengerPlane plane, int passenegersOnboard, int bookedPassengers, boolean supplied, int fuel, boolean crewed, States state, String destination){
+    public FlightClass(int flightNumber, PassengerPlane plane, int passenegersOnboard, int bookedPassengers, boolean supplied, int fuel, boolean crewed, States state, String destination){
         
         this.flightNumber = flightNumber;
         this.plane = plane;

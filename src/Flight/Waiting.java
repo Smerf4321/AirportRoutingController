@@ -66,8 +66,13 @@ public class Waiting implements FlightState {
      */
     @Override
     public void departing(FlightClass flight) {
+        
+        //presentation sake
+        flight.giveClearance();
+        
         if (flight.getClearance()){
             System.out.println("You can depart");
+            flight.setState(new InFlight());
         }
         else {
             System.out.println("You don't have clearance to depart yet");
