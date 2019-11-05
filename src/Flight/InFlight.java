@@ -20,10 +20,12 @@ public class InFlight implements FlightState {
      * This method checks whether the flight has clearance to land/depart
      * @param flight instantiated FlightClass, should be passed automatically by readyCheck of this class
      */
-    private void cleranceCheck(FlightClass flight) {
-        if (runwayOpen){
+    private void clearanceCheck(FlightClass flight) {
+        if (!flight.getRunway().isEmpty()){
             flight.giveClearance();
             System.out.println("You have clearance flight " + flight.getFlightNumber());
+            Runways.runways.replace(flight.getRunway(), new Boolean (false));
+            flight.setState(new Waiting());
         }
         else {
             System.out.println("You don't have clearance flight "+ flight.getFlightNumber());
@@ -31,28 +33,36 @@ public class InFlight implements FlightState {
     }
 
     /**
-     * readyCheck override specific for the InFlight class
-     * It checks if there is a free runway and if the flight has the clearance to land/depart
+     * Empty readyCheck method
      * @param flight instantiated FlightClass
      */
     @Override
-    public void readyCheck(FlightClass flight) {
-        cleranceCheck(flight);
-        
+    public void readyCheck(FlightClass flight) {}
+    
+    /**
+     * arriving method override specific for the InFlight class
+     * It checks if there is a free runway and if the flight has the clearance 
+     * to land
+     * @param flight instantiated FlightClass
+     */
+    @Override
+    public void arriving(FlightClass flight) {
         //Checks for a free runway
         for (Map.Entry r : Runways.runways.entrySet()){
             if (!((Boolean)r.getValue()).booleanValue()){
-                System.out.println("Runway "+ r.getKey() + " is clear");
-                runwayOpen = true;
+                flight.setRunway((String)r.getKey());
                 r.setValue(new Boolean(true));
                 break;
             }
         }
-        
-        //Gets the clearance to land/depart
-        if (flight.getClearance()){
-            System.out.println("Flight " + flight.getFlightNumber() + " landing");
-            flight.setState(new Waiting());
-        }
+        clearanceCheck(flight);
+    }
+
+    /**
+     * Empty departing method
+     * @param flight instantiated FlightClass
+     */
+    @Override
+    public void departing(FlightClass flight) {
     }
 }

@@ -12,7 +12,22 @@ package Flight;
 public interface FlightState {
     /**
      * A method to be overridden by the classes that implement the interface
+     * Checks if the plane is ready to depart
      * @param flight instantiated FlightClass 
      */
     void readyCheck(FlightClass flight);
+    
+    /**
+     * A method to be overridden by the classes that implement the interface
+     * Checks if the flight has clearance to land
+     * @param flight 
+     */
+    void arriving(FlightClass flight);
+    
+    /**
+     * A method to be overridden by the classes that implement the interface
+     * Checks if the flight has clearance to depart
+     * @param flight 
+     */
+    void departing(FlightClass flight);
 }

@@ -5,6 +5,8 @@
  */
 package Flight;
 import airportroutingcontroller.Location;
+import airportroutingcontroller.Runways;
+import java.util.Map;
 /**
  * This class represents the behaviour of the flight while parked
  * @author v8243060
@@ -52,10 +54,17 @@ public class Parked implements FlightState {
             else if (!flight.isSupplied()){
                 flight.setState(new LowSupplies());
             }
+            
+            //should fire only when the plane is ready to depart e.g. 
+            //is full on fuel, is supplied, crewed and passengers and onboard
+            else {
+                flight.departing(flight);
+            }
         }
         
         //case for false
         else if (!flight.getDestination().equals(Location.Location)){
+            flight.revokeClearance();
             
             //if there are passangers booked for the flight the method will 
             //change the state of the flight to NoPassangersOnboard
@@ -74,6 +83,43 @@ public class Parked implements FlightState {
             else if (!flight.isSupplied()){
                 flight.setState(new LowSupplies());
             }
+            
+            //should fire only when the plane is ready to depart e.g. 
+            //is full on fuel, is supplied, crewed and passengers and onboard
+            else {
+                flight.departing(flight);
+            }
+        }
+    }
+
+    /**
+     * Empty arriving method
+     * @param flight instantiated FlightClass
+     */
+    @Override
+    public void arriving(FlightClass flight) {}
+
+    /**
+     * Checks of there are any available runways for the flight
+     * @param flight 
+     */
+    @Override
+    public void departing(FlightClass flight) {
+        boolean runwayOpen = false;
+        //Checks for a free runway and gives taxing guidance to the flight
+        for (Map.Entry r : Runways.runways.entrySet()){
+            if (!((Boolean)r.getValue()).booleanValue()){
+                System.out.println("Proceed to " + r.getKey() + " runway");
+                runwayOpen = true;
+                r.setValue(new Boolean(true));
+                flight.setRunway((String)r.getKey());
+                flight.setState(new InFlight());
+                break;
+            }
+        }
+        //in case there are no empty runways
+        if (!runwayOpen){
+            System.out.println("There aren't any empty runways flight  " + flight.getFlightNumber());
         }
     }
     

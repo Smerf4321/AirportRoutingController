@@ -6,6 +6,7 @@
 package Flight;
 
 import airportroutingcontroller.Bays;
+import airportroutingcontroller.Runways;
 import java.util.Map;
 
 /**
@@ -15,21 +16,36 @@ import java.util.Map;
 public class Waiting implements FlightState {
 
     /**
-     * readyCheck override specific for the Waiting class
+     * Empty readyCheck method
+     * @param flight instantiated FlightClass
+     */
+    @Override
+    public void readyCheck(FlightClass flight) {}
+    
+    /**
+     * This method displays the taxing instructions for the arriving flight
+     * @param bay Integer, bay the flight is taxing to
+     */
+    private void taxingGuidance(Integer bay){
+        System.out.println("Proceed to bay "+ bay);
+    }
+
+    /**
+     * arriving override specific for the Waiting class
      * checks for an empty bay and then displays the instructions to guide the
      * flight into that bay
      * @param flight instantiated FlightClass
      */
     @Override
-    public void readyCheck(FlightClass flight) {
-        
-        //checks for an empty bay
+    public void arriving(FlightClass flight) {
+        //checks for an empty bay and gives taxing guidance to the flight
         boolean bayFound = false;
         for (Map.Entry r : Bays.bays.entrySet()){
             if (!((Boolean)r.getValue()).booleanValue()){
                 taxingGuidance((Integer)r.getKey());
                 bayFound = true;
                 r.setValue(new Boolean(true));
+                flight.setBay((Integer)r.getKey());
                 flight.setState(new Parked());
                 break;
             }
@@ -38,13 +54,23 @@ public class Waiting implements FlightState {
         if (bayFound = false){
             System.out.println("ERROR - NO EMPTY BAYS FOUND");
         }
+        else {
+            Bays.bays.replace(flight.getBay(), (new Boolean (false)));
+        }
     }
-    
+
     /**
-     * This method displays the taxing instructions for the plane
-     * @param bay int, bay that the plane will dock at
+     * departing override specific for the Waiting class
+     * checks for clearance of the flight
+     * @param flight instantiated FlightClass
      */
-    private void taxingGuidance(Integer bay){
-        System.out.println("Proceed to bay "+ bay);
+    @Override
+    public void departing(FlightClass flight) {
+        if (flight.getClearance()){
+            System.out.println("You can depart");
+        }
+        else {
+            System.out.println("You don't have clearance to depart yet");
+        }
     }
 }

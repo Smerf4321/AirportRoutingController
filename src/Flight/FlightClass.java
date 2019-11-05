@@ -88,6 +88,16 @@ public class FlightClass implements FlightState{
     private boolean preventFurtherAction;
     
     /**
+     * Stores bey the flight is occupying
+     */
+    private Integer bay;
+    
+    /**
+     * stores which runway the plan is using
+     */
+    private String runway;
+    
+    /**
      * Creates the FlightClass object which represents the flight
      * @param flightNumber Identification of the flight
      * @param plane Plane that is associated with the flight
@@ -273,8 +283,40 @@ public class FlightClass implements FlightState{
     }
     
     /**
-     * Checks if the plane is ready to depart from the airport
-     * It calls the readyCheck of the current flight state class
+     * Sets the bay the flight is to dock to
+     * @param bay Integer
+     */
+    public void setBay(Integer bay){
+        this.bay = bay;
+    }
+    
+    /**
+     * Gets the bay the flight is docked to
+     * @return Integer
+     */
+    public Integer getBay(){
+        return bay;
+    }
+    
+    /**
+     * Sets the runway the plane uses
+     * @param runway String
+     */
+    public void setRunway(String runway){
+        this.runway = runway;
+    }
+    
+    /**
+     * Gets the runway the plane uses
+     * @return String
+     */
+    public String getRunway(){
+        return runway;
+    }
+    
+    /**
+     * Checks if the plane is ready
+     * It calls the readyCheck method of the current flight state class
      * @param flight passes itself, as the state classes need a reference to the variables stored in the flight class
      */
     @Override
@@ -282,6 +324,30 @@ public class FlightClass implements FlightState{
         //checks if there is an emergency stop activated
         if (!preventFurtherAction){
             fs.readyCheck(this);
+        }
+    }
+
+    /**
+     * Behaviour of the arriving plane
+     * It calls the arriving method of the current flight state class
+     * @param flight passes itself, as the state classes need a reference to the variables stored in the flight class
+     */
+    @Override
+    public void arriving(FlightClass flight) {
+        if (!preventFurtherAction){
+            fs.arriving(this);
+        }
+    }
+
+    /**
+     * Behaviour of the departing plane
+     * It calls the departing method of the current flight state class
+     * @param flight passes itself, as the state classes need a reference to the variables stored in the flight class
+     */
+    @Override
+    public void departing(FlightClass flight) {
+        if (!preventFurtherAction){
+            fs.departing(this);
         }
     }
 }

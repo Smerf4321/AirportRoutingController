@@ -23,9 +23,18 @@ public class NoPassangersOnboard implements FlightState {
         flight.passengersEmbarked();
         flight.setState(new Parked());
         
+        //commented out for presentation purposes!
         //the method will automatically call the readyCheck 
         //to automate the proces
-        flight.readyCheck(flight);
+        //flight.readyCheck(flight);
+    }
+
+    @Override
+    public void arriving(FlightClass flight) {
+    }
+
+    @Override
+    public void departing(FlightClass flight) {
     }
     
 }
