@@ -108,7 +108,7 @@ public class Parked implements FlightState {
 
     /**
      * Checks of there are any available runways for the flight
-     * @param flight 
+     * @param flight instantiated FlightClass
      */
     @Override
     public void departing(FlightClass flight) {

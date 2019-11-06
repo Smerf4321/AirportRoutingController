@@ -20,14 +20,14 @@ public interface FlightState {
     /**
      * A method to be overridden by the classes that implement the interface
      * Checks if the flight has clearance to land
-     * @param flight 
+     * @param flight instantiated FlightClass
      */
     void arriving(FlightClass flight);
     
     /**
      * A method to be overridden by the classes that implement the interface
      * Checks if the flight has clearance to depart
-     * @param flight 
+     * @param flight instantiated FlightClass
      */
     void departing(FlightClass flight);
 }

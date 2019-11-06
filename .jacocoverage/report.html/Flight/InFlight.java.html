@@ -23,12 +23,12 @@ import java.util.Map;
     private void clearanceCheck(FlightClass flight) {
 <span class="fc bfc" id="L24" title="All 2 branches covered.">        if (flight.getRunway().equals(&quot;&quot;)) {</span>
 <span class="fc" id="L25">            System.out.println(&quot;You don't have clearance flight &quot;+ flight.getFlightNumber());</span>
-<span class="fc" id="L26">            flight.testOutput += (&quot;0&quot;);</span>
+<span class="fc" id="L26">            flight.testOutput = (&quot;0&quot;);</span>
         }
         else {
 <span class="fc" id="L29">            flight.giveClearance();</span>
 <span class="fc" id="L30">            System.out.println(&quot;You have clearance flight &quot; + flight.getFlightNumber());</span>
-<span class="fc" id="L31">            flight.testOutput += (&quot;1&quot;);</span>
+<span class="fc" id="L31">            flight.testOutput = (&quot;1&quot;);</span>
 <span class="fc" id="L32">            Runways.runways.replace(flight.getRunway(), new Boolean (false));</span>
 <span class="fc" id="L33">            flight.setState(new Waiting());</span>
         }
