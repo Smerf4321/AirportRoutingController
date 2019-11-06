@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../.resources/report.gif" type="image/gif"/><title>InFlight.java</title><link rel="stylesheet" href="../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../.sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">JaCoCoverage analysis of project &quot;AirportRoutingController&quot; (powered by JaCoCo from EclEmma)</a> &gt; <a href="index.source.html" class="el_package">Flight</a> &gt; <span class="el_source">InFlight.java</span></div><h1>InFlight.java</h1><pre class="source lang-java linenums">/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package Flight;
+
+import airportroutingcontroller.Runways;
+import java.util.Iterator;
+import java.util.Map;
+/**
+ * This state class represents the behaviour of the flight while it is in the air
+ * @author v8243060
+ */
+<span class="fc" id="L15">public class InFlight implements FlightState {</span>
+    
+<span class="fc" id="L17">    private boolean runwayOpen = false;</span>
+    
+    /**
+     * This method checks whether the flight has clearance to land/depart
+     * @param flight instantiated FlightClass, should be passed automatically by readyCheck of this class
+     */
+    private void clearanceCheck(FlightClass flight) {
+<span class="fc bfc" id="L24" title="All 2 branches covered.">        if (flight.getRunway().equals(&quot;&quot;)) {</span>
+<span class="fc" id="L25">            System.out.println(&quot;You don't have clearance flight &quot;+ flight.getFlightNumber());</span>
+<span class="fc" id="L26">            flight.testOutput += (&quot;0&quot;);</span>
+        }
+        else {
+<span class="fc" id="L29">            flight.giveClearance();</span>
+<span class="fc" id="L30">            System.out.println(&quot;You have clearance flight &quot; + flight.getFlightNumber());</span>
+<span class="fc" id="L31">            flight.testOutput += (&quot;1&quot;);</span>
+<span class="fc" id="L32">            Runways.runways.replace(flight.getRunway(), new Boolean (false));</span>
+<span class="fc" id="L33">            flight.setState(new Waiting());</span>
+        }
+<span class="fc" id="L35">    }</span>
+
+    /**
+     * Empty readyCheck method
+     * @param flight instantiated FlightClass
+     */
+    @Override
+<span class="fc" id="L42">    public void readyCheck(FlightClass flight) {}</span>
+    
+    /**
+     * arriving method override specific for the InFlight class
+     * It checks if there is a free runway and if the flight has the clearance 
+     * to land
+     * @param flight instantiated FlightClass
+     */
+    @Override
+    public void arriving(FlightClass flight) {
+        //Checks for a free runway
+<span class="fc bfc" id="L53" title="All 2 branches covered.">        for (Map.Entry r : Runways.runways.entrySet()){</span>
+<span class="fc bfc" id="L54" title="All 2 branches covered.">            if (!(Boolean)r.getValue()){</span>
+<span class="fc" id="L55">                flight.setRunway((String)r.getKey());</span>
+<span class="fc" id="L56">                r.setValue(true);</span>
+<span class="fc" id="L57">                break;</span>
+            }
+<span class="fc" id="L59">        }</span>
+        
+<span class="fc" id="L61">        clearanceCheck(flight);</span>
+<span class="fc" id="L62">    }</span>
+
+    /**
+     * Empty departing method
+     * @param flight instantiated FlightClass
+     */
+    @Override
+    public void departing(FlightClass flight) {
+<span class="fc" id="L70">    }</span>
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.6.201602180812</span></div></body></html>

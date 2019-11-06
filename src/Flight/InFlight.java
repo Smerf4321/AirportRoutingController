@@ -21,16 +21,16 @@ public class InFlight implements FlightState {
      * @param flight instantiated FlightClass, should be passed automatically by readyCheck of this class
      */
     private void clearanceCheck(FlightClass flight) {
-        if (!flight.getRunway().isEmpty()){
+        if (flight.getRunway().equals("")) {
+            System.out.println("You don't have clearance flight "+ flight.getFlightNumber());
+            flight.testOutput += ("0");
+        }
+        else {
             flight.giveClearance();
             System.out.println("You have clearance flight " + flight.getFlightNumber());
             flight.testOutput += ("1");
             Runways.runways.replace(flight.getRunway(), new Boolean (false));
             flight.setState(new Waiting());
-        }
-        else {
-            System.out.println("You don't have clearance flight "+ flight.getFlightNumber());
-            flight.testOutput += ("0");
         }
     }
 
@@ -51,12 +51,13 @@ public class InFlight implements FlightState {
     public void arriving(FlightClass flight) {
         //Checks for a free runway
         for (Map.Entry r : Runways.runways.entrySet()){
-            if (!((Boolean)r.getValue()).booleanValue()){
+            if (!(Boolean)r.getValue()){
                 flight.setRunway((String)r.getKey());
-                r.setValue(new Boolean(true));
+                r.setValue(true);
                 break;
             }
         }
+        
         clearanceCheck(flight);
     }
 

@@ -42,7 +42,7 @@ public class Waiting implements FlightState {
         //checks for an empty bay and gives taxing guidance to the flight
         boolean bayFound = false;
         for (Map.Entry r : Bays.bays.entrySet()){
-            if (!((Boolean)r.getValue()).booleanValue()){
+            if (!(boolean)r.getValue()){
                 taxingGuidance(flight, (Integer)r.getKey());
                 bayFound = true;
                 System.out.println(r.getValue());
@@ -51,9 +51,9 @@ public class Waiting implements FlightState {
                 break;
             }
         }
-
+        
         //in case the bay was not found the error is displayed
-        if (bayFound = false){
+        if (bayFound == false){
             System.out.println("ERROR - NO EMPTY BAYS FOUND");
             flight.testOutput = ("0");
         }

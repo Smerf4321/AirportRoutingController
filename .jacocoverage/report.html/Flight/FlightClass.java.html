@@ -1,4 +1,4 @@
-/*
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../.resources/report.gif" type="image/gif"/><title>FlightClass.java</title><link rel="stylesheet" href="../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../.sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">JaCoCoverage analysis of project &quot;AirportRoutingController&quot; (powered by JaCoCo from EclEmma)</a> &gt; <a href="index.source.html" class="el_package">Flight</a> &gt; <span class="el_source">FlightClass.java</span></div><h1>FlightClass.java</h1><pre class="source lang-java linenums">/*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
@@ -50,7 +50,7 @@ public class FlightClass implements FlightState{
      * Key is the seat
      * Value is the passenger name
      */
-    private HashMap<String, String> passangerList;
+    private HashMap&lt;String, String&gt; passangerList;
     
     /**
      * Destination of the flight stored as a string
@@ -70,7 +70,7 @@ public class FlightClass implements FlightState{
     /**
      * Arbitrary minimum fuel a flight needs to take off
      */
-    private int minimumFuel = 50;
+<span class="fc" id="L73">    private int minimumFuel = 50;</span>
     
     /**
      * True if there is crew on-board
@@ -90,14 +90,14 @@ public class FlightClass implements FlightState{
     /**
      * Stores bey the flight is occupying
      */
-    private Integer bay = 0;
+<span class="fc" id="L93">    private Integer bay = 0;</span>
     
     /**
      * stores which runway the plan is using
      */
-    private String runway = "";
+<span class="fc" id="L98">    private String runway = &quot;&quot;;</span>
     
-    public String testOutput = "";
+<span class="fc" id="L100">    public String testOutput = &quot;&quot;;</span>
     
     /**
      * Creates the FlightClass object which represents the flight
@@ -111,57 +111,57 @@ public class FlightClass implements FlightState{
      * @param state Current state (can be only InFlight or Parked)
      * @param destination String name of the airport thats the flight destination
      */
-    public FlightClass(int flightNumber, PassengerPlane plane, int passenegersOnboard, int bookedPassengers, boolean supplied, int fuel, boolean crewed, States state, String destination){
+<span class="fc" id="L114">    public FlightClass(int flightNumber, PassengerPlane plane, int passenegersOnboard, int bookedPassengers, boolean supplied, int fuel, boolean crewed, States state, String destination){</span>
         
-        this.flightNumber = flightNumber;
-        this.plane = plane;
-        this.passenegersOnboard = passenegersOnboard;
-        this.bookedPassengers = bookedPassengers;
-        this.supplied = supplied;
-        this.currentFuel = fuel;
-        this.crewed = crewed;
-        this.destination = destination;
-        this.clearance = false;
+<span class="fc" id="L116">        this.flightNumber = flightNumber;</span>
+<span class="fc" id="L117">        this.plane = plane;</span>
+<span class="fc" id="L118">        this.passenegersOnboard = passenegersOnboard;</span>
+<span class="fc" id="L119">        this.bookedPassengers = bookedPassengers;</span>
+<span class="fc" id="L120">        this.supplied = supplied;</span>
+<span class="fc" id="L121">        this.currentFuel = fuel;</span>
+<span class="fc" id="L122">        this.crewed = crewed;</span>
+<span class="fc" id="L123">        this.destination = destination;</span>
+<span class="fc" id="L124">        this.clearance = false;</span>
         
         // check if the flight is in the correct state
-        if (state == States.INFLIGHT){
-            this.state = state;
-            fs = new InFlight();
-            testOutput = "F";
+<span class="fc bfc" id="L127" title="All 2 branches covered.">        if (state == States.INFLIGHT){</span>
+<span class="fc" id="L128">            this.state = state;</span>
+<span class="fc" id="L129">            fs = new InFlight();</span>
+<span class="fc" id="L130">            testOutput = &quot;F&quot;;</span>
         }
-        else if (state == States.PARKED){
-            this.state = state;
-            fs = new Parked();
-            testOutput = "P";
+<span class="fc bfc" id="L132" title="All 2 branches covered.">        else if (state == States.PARKED){</span>
+<span class="fc" id="L133">            this.state = state;</span>
+<span class="fc" id="L134">            fs = new Parked();</span>
+<span class="fc" id="L135">            testOutput = &quot;P&quot;;</span>
         }
         // in the real system this would cause a critical error to be resolved by management/technicians
         // the flight should never be instatianted with states other than InFlight or Parked
         else {
-            testOutput = "E";
-            System.out.println("Error. Plane can only be added to the system if it's either arriving or parked.");
+<span class="fc" id="L140">            testOutput = &quot;E&quot;;</span>
+<span class="fc" id="L141">            System.out.println(&quot;Error. Plane can only be added to the system if it's either arriving or parked.&quot;);</span>
         }  
-    }
+<span class="fc" id="L143">    }</span>
     
     /**
      * Give clearance to the flight to land/takeoff
      */
     public void giveClearance (){
-        clearance = true;
-    }
+<span class="fc" id="L149">        clearance = true;</span>
+<span class="fc" id="L150">    }</span>
     
     /**
      * Revoke clearance to the flight to land/takeoff
      */
     public void revokeClearance(){
-        clearance = false;
-    }
+<span class="fc" id="L156">        clearance = false;</span>
+<span class="fc" id="L157">    }</span>
     
     /**
      * Returns the clearance of the flight
      * @return boolean
      */
     public boolean getClearance(){
-        return clearance;
+<span class="fc" id="L164">        return clearance;</span>
     }
     
     /**
@@ -169,7 +169,7 @@ public class FlightClass implements FlightState{
      * @return int
      */
     public int getFlightNumber(){
-        return flightNumber;
+<span class="fc" id="L172">        return flightNumber;</span>
     }
     
     /**
@@ -177,7 +177,7 @@ public class FlightClass implements FlightState{
      * @return int
      */
     public int getCurrentFuel(){
-        return currentFuel;
+<span class="fc" id="L180">        return currentFuel;</span>
     }
     
     /**
@@ -185,7 +185,7 @@ public class FlightClass implements FlightState{
      * @return int
      */
     public int getMinimumFuel(){
-        return minimumFuel;
+<span class="fc" id="L188">        return minimumFuel;</span>
     }
     
     /**
@@ -193,7 +193,7 @@ public class FlightClass implements FlightState{
      * @return int
      */
     public int getMaximumFuel(){
-        return plane.getMaxFuel();
+<span class="nc" id="L196">        return plane.getMaxFuel();</span>
     }
     
     /**
@@ -201,7 +201,7 @@ public class FlightClass implements FlightState{
      * @return String
      */
     public String getDestination(){
-        return destination;
+<span class="fc" id="L204">        return destination;</span>
     }
 
     /**
@@ -209,15 +209,15 @@ public class FlightClass implements FlightState{
      * @param state one of the flight States as a class
      */
     public void setState(FlightState state){
-        fs = state;
-    }
+<span class="fc" id="L212">        fs = state;</span>
+<span class="fc" id="L213">    }</span>
     
     /**
      * Returns whether the plane is supplied
      * @return boolean
      */
     public boolean isSupplied(){
-        return supplied;
+<span class="fc" id="L220">        return supplied;</span>
     }
     
     /**
@@ -225,81 +225,81 @@ public class FlightClass implements FlightState{
      * @return boolean
      */
     public boolean isCrewed(){
-        return crewed;
+<span class="nc" id="L228">        return crewed;</span>
     }
     
     /**
      * Sets crewed as false
      */
     public void crewDisembarked(){
-        crewed = false;
-    }
+<span class="nc" id="L235">        crewed = false;</span>
+<span class="nc" id="L236">    }</span>
     
     /**
      * sets crewed as true
      */
     public void crewEmbarked(){
-        crewed = true;
-    }
+<span class="fc" id="L242">        crewed = true;</span>
+<span class="fc" id="L243">    }</span>
     
     /**
      * Returns the number of passengers booked for the flight
      * @return int
      */
     public int getPassengersBooked(){
-        return bookedPassengers;
+<span class="fc" id="L250">        return bookedPassengers;</span>
     }
     
     /**
      * Sets the number of passengers on-board to zero
      */
     public void passengersDisembarked(){
-        passenegersOnboard=0;
-    }
+<span class="fc" id="L257">        passenegersOnboard=0;</span>
+<span class="fc" id="L258">    }</span>
     
     /**
      * Sets the number of passengers on-board to the number of passenger booked
      */
     public void passengersEmbarked(){
-        passenegersOnboard = bookedPassengers;
-    }
+<span class="fc" id="L264">        passenegersOnboard = bookedPassengers;</span>
+<span class="fc" id="L265">    }</span>
     
     /**
      * Returns the number of passengers on-board
      * @return int
      */
     public int getPassengersOnboard(){
-        return passenegersOnboard;
+<span class="fc" id="L272">        return passenegersOnboard;</span>
     }
     
     /**
      * Sets the current fuel to the value of maximum fuel
      */
     public void refuel(){
-        currentFuel = plane.getMaxFuel();
-    }
+<span class="fc" id="L279">        currentFuel = plane.getMaxFuel();</span>
+<span class="fc" id="L280">    }</span>
     
     /**
      * Sets supplied as true
      */
     public void resupply(){
-        supplied = true;
-    }
+<span class="fc" id="L286">        supplied = true;</span>
+<span class="fc" id="L287">    }</span>
     
     /**
      * Sets the bay the flight is to dock to
      * @param bay Integer
      */
     public void setBay(Integer bay){
-        this.bay = bay;
-    }
+<span class="fc" id="L294">        this.bay = bay;</span>
+<span class="fc" id="L295">    }</span>
     
     /**
      * Gets the bay the flight is docked to
      * @return Integer
      */
     public Integer getBay(){
-        return bay;
+<span class="fc" id="L302">        return bay;</span>
     }
     
     /**
@@ -307,20 +307,20 @@ public class FlightClass implements FlightState{
      * @param runway String
      */
     public void setRunway(String runway){
-        this.runway = runway;
-    }
+<span class="fc" id="L310">        this.runway = runway;</span>
+<span class="fc" id="L311">    }</span>
     
     /**
      * Gets the runway the plane uses
      * @return String
      */
     public String getRunway(){
-        return runway;
+<span class="fc" id="L318">        return runway;</span>
     }
     
     public void preventFurtherActionTest(){
-        preventFurtherAction = true;
-    }
+<span class="fc" id="L322">        preventFurtherAction = true;</span>
+<span class="fc" id="L323">    }</span>
     
     /**
      * Checks if the plane is ready
@@ -330,14 +330,14 @@ public class FlightClass implements FlightState{
     @Override
     public void readyCheck(FlightClass flight) {
         //checks if there is an emergency stop activated
-        if (!preventFurtherAction){
-            fs.readyCheck(this);
-            flight.testOutput = ("1");
+<span class="fc bfc" id="L333" title="All 2 branches covered.">        if (!preventFurtherAction){</span>
+<span class="fc" id="L334">            fs.readyCheck(this);</span>
+<span class="fc" id="L335">            flight.testOutput = (&quot;1&quot;);</span>
         }
         else {
-            flight.testOutput = ("0");
+<span class="fc" id="L338">            flight.testOutput = (&quot;0&quot;);</span>
         }
-    }
+<span class="fc" id="L340">    }</span>
 
     /**
      * Behaviour of the arriving plane
@@ -346,14 +346,14 @@ public class FlightClass implements FlightState{
      */
     @Override
     public void arriving(FlightClass flight) {
-        if (!preventFurtherAction){
-            fs.arriving(this);
-            flight.testOutput = ("1");
+<span class="fc bfc" id="L349" title="All 2 branches covered.">        if (!preventFurtherAction){</span>
+<span class="fc" id="L350">            fs.arriving(this);</span>
+<span class="fc" id="L351">            flight.testOutput = (&quot;1&quot;);</span>
         }
         else {
-            flight.testOutput = ("0");
+<span class="fc" id="L354">            flight.testOutput = (&quot;0&quot;);</span>
         }
-    }
+<span class="fc" id="L356">    }</span>
 
     /**
      * Behaviour of the departing plane
@@ -362,12 +362,13 @@ public class FlightClass implements FlightState{
      */
     @Override
     public void departing(FlightClass flight) {
-        if (!preventFurtherAction){
-            fs.departing(this);
-            flight.testOutput = ("1");
+<span class="fc bfc" id="L365" title="All 2 branches covered.">        if (!preventFurtherAction){</span>
+<span class="fc" id="L366">            fs.departing(this);</span>
+<span class="fc" id="L367">            flight.testOutput = (&quot;1&quot;);</span>
         }
         else {
-            flight.testOutput = ("0");
+<span class="fc" id="L370">            flight.testOutput = (&quot;0&quot;);</span>
         }
-    }
+<span class="fc" id="L372">    }</span>
 }
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.6.201602180812</span></div></body></html>

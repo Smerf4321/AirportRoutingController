@@ -22,6 +22,7 @@ public class Runways {
     }
     
     public static void changeRunwayTest(){
-        runways.replace("8L", true);
+        runways.remove("8L");
+        runways.put("8L", true);
     }
 }

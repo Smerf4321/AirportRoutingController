@@ -17,3 +17,5 @@ stored within a database.
 Flight package stores the implementation of the State Pattern with regards to
 flight management. It stores the main FlightClass and all it's states along 
 with the interface FlightState they all implement.
+
+To test, right-click Flight package in Test Packages and choose Test Package.

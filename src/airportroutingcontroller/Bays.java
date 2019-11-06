@@ -22,7 +22,8 @@ public class Bays {
    }
    
    public static void changeBayTest(){
-        bays.replace(1, true);
+       bays.remove(1); 
+       bays.put(1, true);
     }
 }
 

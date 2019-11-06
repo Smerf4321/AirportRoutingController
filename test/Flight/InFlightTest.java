@@ -13,6 +13,7 @@ import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import static org.junit.Assert.*;
+import org.junit.Ignore;
 
 /**
  *
@@ -47,7 +48,7 @@ public class InFlightTest {
         System.out.println("arrivingSuccess");
         FlightClass flight = new FlightClass(23446, (PassengerPlane)new PassengerPlane("ACQ110", false, "Boeing 747", "Ryanair", 50, 100), 0, 20, false, 40, true, States.INFLIGHT, "London");
         InFlight instance = new InFlight();
-        instance.readyCheck(flight);
+        instance.arriving(flight);
         assertEquals("1", flight.testOutput);
     }
     
@@ -60,7 +61,7 @@ public class InFlightTest {
         FlightClass flight = new FlightClass(23446, (PassengerPlane)new PassengerPlane("ACQ110", false, "Boeing 747", "Ryanair", 50, 100), 0, 20, false, 40, true, States.INFLIGHT, "London");
         InFlight instance = new InFlight();
         Runways.changeRunwayTest();
-        instance.readyCheck(flight);
+        instance.arriving(flight);
         assertEquals("0", flight.testOutput);
     }
 

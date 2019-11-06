@@ -40,6 +40,27 @@ public class FlightClassTest {
     }
 
     /**
+     * Test of the constructor validation with Parked
+     */
+    @Test
+    public void testConstructorParked() {
+        System.out.println("giveClearance");
+        FlightClass instance = new FlightClass(23446, (PassengerPlane)new PassengerPlane("ACQ110", false, "Boeing 747", "Ryanair", 50, 100), 0, 20, false, 40, true, States.PARKED, "London");
+        assertEquals("P", instance.testOutput);
+    }
+    
+    /**
+     * Test of the constructor validation with an invalid state
+     */
+    @Test
+    public void testConstructorAnyOther() {
+        System.out.println("giveClearance");
+        FlightClass instance = new FlightClass(23446, (PassengerPlane)new PassengerPlane("ACQ110", false, "Boeing 747", "Ryanair", 50, 100), 0, 20, false, 40, true, States.LOWFUEL, "London");
+        assertEquals("E", instance.testOutput);
+    }
+
+    
+    /**
      * Test of giveClearance method, of class FlightClass.
      */
     @Test
@@ -113,12 +134,48 @@ public class FlightClassTest {
      * Test prevent further action for readyCheck
      */
     @Test
-    public void testReadyCheck() {
-        System.out.println("readyCheck");
+    public void testReadyCheckPrevent() {
+        System.out.println("readyCheckPrevent");
         FlightClass instance = new FlightClass(23446, (PassengerPlane)new PassengerPlane("ACQ110", false, "Boeing 747", "Ryanair", 50, 100), 0, 20, false, 40, true, States.INFLIGHT, "London");
         instance.preventFurtherActionTest();
         instance.readyCheck(instance);
-        assertEquals(instance.testOutput, "0");
+        assertEquals("0", instance.testOutput);
+    }
+
+    /**
+     * Test prevent further action for arriving
+     */
+    @Test
+    public void testArrivingPrevent() {
+        System.out.println("arrivingPrevent");
+        FlightClass instance = new FlightClass(23446, (PassengerPlane)new PassengerPlane("ACQ110", false, "Boeing 747", "Ryanair", 50, 100), 0, 20, false, 40, true, States.INFLIGHT, "London");
+        instance.preventFurtherActionTest();
+        instance.arriving(instance);
+        assertEquals("0", instance.testOutput);
+    }
+
+    /**
+     * Test prevent further action for departing
+     */
+    @Test
+    public void testDepartingPrevent() {
+        System.out.println("departingPrevent");
+        FlightClass instance = new FlightClass(23446, (PassengerPlane)new PassengerPlane("ACQ110", false, "Boeing 747", "Ryanair", 50, 100), 0, 20, false, 40, true, States.INFLIGHT, "London");
+        instance.preventFurtherActionTest();
+        instance.departing(instance);
+        assertEquals("0", instance.testOutput);
+    }
+    
+    
+    /**
+     * Test checks action for readyCheck
+     */
+    @Test
+    public void testReadyCheck() {
+        System.out.println("readyCheck");
+        FlightClass instance = new FlightClass(23446, (PassengerPlane)new PassengerPlane("ACQ110", false, "Boeing 747", "Ryanair", 50, 100), 0, 20, false, 40, true, States.INFLIGHT, "London");
+        instance.readyCheck(instance);
+        assertEquals("1", instance.testOutput);
     }
 
     /**
@@ -128,9 +185,8 @@ public class FlightClassTest {
     public void testArriving() {
         System.out.println("arriving");
         FlightClass instance = new FlightClass(23446, (PassengerPlane)new PassengerPlane("ACQ110", false, "Boeing 747", "Ryanair", 50, 100), 0, 20, false, 40, true, States.INFLIGHT, "London");
-        instance.preventFurtherActionTest();
         instance.arriving(instance);
-        assertEquals(instance.testOutput, "0");
+        assertEquals("1", instance.testOutput);
     }
 
     /**
@@ -140,9 +196,7 @@ public class FlightClassTest {
     public void testDeparting() {
         System.out.println("departing");
         FlightClass instance = new FlightClass(23446, (PassengerPlane)new PassengerPlane("ACQ110", false, "Boeing 747", "Ryanair", 50, 100), 0, 20, false, 40, true, States.INFLIGHT, "London");
-        instance.preventFurtherActionTest();
         instance.departing(instance);
-        assertEquals(instance.testOutput, "0");
+        assertEquals("1", instance.testOutput);
     }
-    
 }
