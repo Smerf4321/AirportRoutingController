@@ -19,7 +19,7 @@ public class LowFuel implements FlightState {
     @Override
     public void readyCheck(FlightClass flight) {
         System.out.println("Refueling");
-        flight.testOutput += ("F");
+        flight.testOutput = ("F");
         flight.refuel();
         flight.setState(new Parked());
         

@@ -20,7 +20,7 @@ public class NoPassengersOnboard implements FlightState {
     @Override
     public void readyCheck(FlightClass flight) {
         System.out.println("Passengers embarking");
-        flight.testOutput += ("Pe");
+        flight.testOutput = ("Pe");
         flight.passengersEmbarked();
         flight.setState(new Parked());
         

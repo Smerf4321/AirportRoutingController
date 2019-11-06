@@ -23,12 +23,12 @@ public class InFlight implements FlightState {
     private void clearanceCheck(FlightClass flight) {
         if (flight.getRunway().equals("")) {
             System.out.println("You don't have clearance flight "+ flight.getFlightNumber());
-            flight.testOutput += ("0");
+            flight.testOutput = ("0");
         }
         else {
             flight.giveClearance();
             System.out.println("You have clearance flight " + flight.getFlightNumber());
-            flight.testOutput += ("1");
+            flight.testOutput = ("1");
             Runways.runways.replace(flight.getRunway(), new Boolean (false));
             flight.setState(new Waiting());
         }

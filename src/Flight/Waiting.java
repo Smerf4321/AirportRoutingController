@@ -75,12 +75,12 @@ public class Waiting implements FlightState {
         
         if (flight.getClearance()){
             System.out.println("You can depart");
-            flight.testOutput += ("1");
+            flight.testOutput = ("1");
             flight.setState(new InFlight());
         }
         else {
             System.out.println("You don't have clearance to depart yet");
-            flight.testOutput += ("0");
+            flight.testOutput = ("0");
         }
     }
 }
