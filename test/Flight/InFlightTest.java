@@ -48,8 +48,7 @@ public class InFlightTest {
         System.out.println("arrivingSuccess");
         FlightClass flight = new FlightClass(23446, (PassengerPlane)new PassengerPlane("ACQ110", false, "Boeing 747", "Ryanair", 50, 100), 0, 20, false, 40, true, States.INFLIGHT, "London");
         InFlight instance = new InFlight();
-        instance.arriving(flight);
-        assertEquals("1", flight.testOutput);
+        assertTrue(instance.arriving(flight));
     }
     
     /**
@@ -61,8 +60,29 @@ public class InFlightTest {
         FlightClass flight = new FlightClass(23446, (PassengerPlane)new PassengerPlane("ACQ110", false, "Boeing 747", "Ryanair", 50, 100), 0, 20, false, 40, true, States.INFLIGHT, "London");
         InFlight instance = new InFlight();
         Runways.changeRunwayTest();
-        instance.arriving(flight);
-        assertEquals("0", flight.testOutput);
+        assertFalse(instance.arriving(flight));
     }
-
+    
+    /**
+     * Test of departing method, which should return error
+     */
+    @Test
+    public void testDeparting() {
+        System.out.println("departing");
+        FlightClass flight = new FlightClass(23446, (PassengerPlane)new PassengerPlane("ACQ110", false, "Boeing 747", "Ryanair", 50, 100), 0, 20, false, 40, true, States.INFLIGHT, "London");
+        InFlight instance = new InFlight();
+        assertFalse(instance.departing(flight));
+    }
+    
+    
+    /**
+     * Test of readyCheck method, which should return error
+     */
+    @Test
+    public void testReadyCheck() {
+        System.out.println("readyCheck");
+        FlightClass flight = new FlightClass(23446, (PassengerPlane)new PassengerPlane("ACQ110", false, "Boeing 747", "Ryanair", 50, 100), 0, 20, false, 40, true, States.INFLIGHT, "London");
+        InFlight instance = new InFlight();
+        assertFalse(instance.readyCheck(flight));
+    }
 }

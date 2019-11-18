@@ -20,7 +20,10 @@ public class Waiting implements FlightState {
      * @param flight instantiated FlightClass
      */
     @Override
-    public void readyCheck(FlightClass flight) {}
+    public boolean readyCheck(FlightClass flight) {
+        System.out.println("Error. Wrong method called.");
+        return false;
+    }
     
     /**
      * This method displays the taxing instructions for the arriving flight
@@ -38,7 +41,7 @@ public class Waiting implements FlightState {
      * @param flight instantiated FlightClass
      */
     @Override
-    public void arriving(FlightClass flight) {
+    public boolean arriving(FlightClass flight) {
         //checks for an empty bay and gives taxing guidance to the flight
         boolean bayFound = false;
         for (Map.Entry r : Bays.bays.entrySet()){
@@ -48,18 +51,14 @@ public class Waiting implements FlightState {
                 System.out.println(r.getValue());
                 flight.setBay((Integer)r.getKey());
                 flight.setState(new Parked());
-                break;
+                Bays.bays.replace(flight.getBay(), (new Boolean (false)));
+                return true;
             }
         }
         
         //in case the bay was not found the error is displayed
-        if (bayFound == false){
-            System.out.println("ERROR - NO EMPTY BAYS FOUND");
-            flight.testOutput = ("0");
-        }
-        else {
-            Bays.bays.replace(flight.getBay(), (new Boolean (false)));
-        }
+        System.out.println("ERROR - NO EMPTY BAYS FOUND");
+        return false;
     }
 
     /**
@@ -68,19 +67,19 @@ public class Waiting implements FlightState {
      * @param flight instantiated FlightClass
      */
     @Override
-    public void departing(FlightClass flight) {
+    public boolean departing(FlightClass flight) {
         
         //presentation sake UNCOMMENT FOR PRESENTATION!
         //flight.giveClearance();
         
         if (flight.getClearance()){
             System.out.println("You can depart");
-            flight.testOutput = ("1");
             flight.setState(new InFlight());
+            return true;
         }
         else {
             System.out.println("You don't have clearance to depart yet");
-            flight.testOutput = ("0");
+            return false;
         }
     }
 }

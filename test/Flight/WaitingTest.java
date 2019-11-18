@@ -47,8 +47,7 @@ public class WaitingTest {
         System.out.println("arrivingSuccess");
         FlightClass flight = new FlightClass(23446, (PassengerPlane)new PassengerPlane("ACQ110", false, "Boeing 747", "Ryanair", 50, 100), 0, 20, false, 40, true, States.INFLIGHT, "London");
         Waiting instance = new Waiting();
-        instance.arriving(flight);
-        assertEquals("1", flight.testOutput);
+        assertTrue(instance.arriving(flight));
     }
     
     /**
@@ -60,8 +59,7 @@ public class WaitingTest {
         FlightClass flight = new FlightClass(23446, (PassengerPlane)new PassengerPlane("ACQ110", false, "Boeing 747", "Ryanair", 50, 100), 0, 20, false, 40, true, States.INFLIGHT, "London");
         Waiting instance = new Waiting();
         Bays.changeBayTest();
-        instance.arriving(flight);
-        assertEquals("0", flight.testOutput);
+        assertFalse(instance.arriving(flight));
     }
 
     /**
@@ -73,8 +71,7 @@ public class WaitingTest {
         FlightClass flight = new FlightClass(23446, (PassengerPlane)new PassengerPlane("ACQ110", false, "Boeing 747", "Ryanair", 50, 100), 0, 20, false, 40, true, States.INFLIGHT, "London");
         Waiting instance = new Waiting();
         flight.giveClearance();
-        instance.departing(flight);
-        assertEquals("1", flight.testOutput);
+        assertTrue(instance.departing(flight));
     }
     
     /**
@@ -86,7 +83,18 @@ public class WaitingTest {
         FlightClass flight = new FlightClass(23446, (PassengerPlane)new PassengerPlane("ACQ110", false, "Boeing 747", "Ryanair", 50, 100), 0, 20, false, 40, true, States.INFLIGHT, "London");
         Waiting instance = new Waiting();
         flight.revokeClearance();
-        instance.departing(flight);
-        assertEquals("0", flight.testOutput);
+        assertFalse(instance.departing(flight));
+    }
+    
+    
+    /**
+     * Test of readyCheck method, which should return error
+     */
+    @Test
+    public void testReadyCheck() {
+        System.out.println("readyCheck");
+        FlightClass flight = new FlightClass(23446, (PassengerPlane)new PassengerPlane("ACQ110", false, "Boeing 747", "Ryanair", 50, 100), 0, 20, false, 40, true, States.INFLIGHT, "London");
+        Waiting instance = new Waiting();
+        assertFalse(instance.readyCheck(flight));
     }
 }

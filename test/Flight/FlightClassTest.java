@@ -138,8 +138,7 @@ public class FlightClassTest {
         System.out.println("readyCheckPrevent");
         FlightClass instance = new FlightClass(23446, (PassengerPlane)new PassengerPlane("ACQ110", false, "Boeing 747", "Ryanair", 50, 100), 0, 20, false, 40, true, States.INFLIGHT, "London");
         instance.preventFurtherActionTest();
-        instance.readyCheck(instance);
-        assertEquals("0", instance.testOutput);
+        assertFalse(instance.readyCheck(instance));
     }
 
     /**
@@ -150,8 +149,7 @@ public class FlightClassTest {
         System.out.println("arrivingPrevent");
         FlightClass instance = new FlightClass(23446, (PassengerPlane)new PassengerPlane("ACQ110", false, "Boeing 747", "Ryanair", 50, 100), 0, 20, false, 40, true, States.INFLIGHT, "London");
         instance.preventFurtherActionTest();
-        instance.arriving(instance);
-        assertEquals("0", instance.testOutput);
+        assertFalse(instance.arriving(instance));
     }
 
     /**
@@ -162,8 +160,7 @@ public class FlightClassTest {
         System.out.println("departingPrevent");
         FlightClass instance = new FlightClass(23446, (PassengerPlane)new PassengerPlane("ACQ110", false, "Boeing 747", "Ryanair", 50, 100), 0, 20, false, 40, true, States.INFLIGHT, "London");
         instance.preventFurtherActionTest();
-        instance.departing(instance);
-        assertEquals("0", instance.testOutput);
+        assertFalse(instance.departing(instance));
     }
     
     
@@ -174,8 +171,7 @@ public class FlightClassTest {
     public void testReadyCheck() {
         System.out.println("readyCheck");
         FlightClass instance = new FlightClass(23446, (PassengerPlane)new PassengerPlane("ACQ110", false, "Boeing 747", "Ryanair", 50, 100), 0, 20, false, 40, true, States.INFLIGHT, "London");
-        instance.readyCheck(instance);
-        assertEquals("1", instance.testOutput);
+        assertTrue(instance.readyCheck(instance));
     }
 
     /**
@@ -185,8 +181,7 @@ public class FlightClassTest {
     public void testArriving() {
         System.out.println("arriving");
         FlightClass instance = new FlightClass(23446, (PassengerPlane)new PassengerPlane("ACQ110", false, "Boeing 747", "Ryanair", 50, 100), 0, 20, false, 40, true, States.INFLIGHT, "London");
-        instance.arriving(instance);
-        assertEquals("1", instance.testOutput);
+        assertTrue(instance.arriving(instance));
     }
 
     /**
@@ -196,7 +191,6 @@ public class FlightClassTest {
     public void testDeparting() {
         System.out.println("departing");
         FlightClass instance = new FlightClass(23446, (PassengerPlane)new PassengerPlane("ACQ110", false, "Boeing 747", "Ryanair", 50, 100), 0, 20, false, 40, true, States.INFLIGHT, "London");
-        instance.departing(instance);
-        assertEquals("1", instance.testOutput);
+        assertTrue(instance.departing(instance));
     }
 }

@@ -328,14 +328,14 @@ public class FlightClass implements FlightState{
      * @param flight passes itself, as the state classes need a reference to the variables stored in the flight class
      */
     @Override
-    public void readyCheck(FlightClass flight) {
+    public boolean readyCheck(FlightClass flight) {
         //checks if there is an emergency stop activated
         if (!preventFurtherAction){
             fs.readyCheck(this);
-            flight.testOutput = ("1");
+            return true;
         }
         else {
-            flight.testOutput = ("0");
+            return false;
         }
     }
 
@@ -345,13 +345,13 @@ public class FlightClass implements FlightState{
      * @param flight passes itself, as the state classes need a reference to the variables stored in the flight class
      */
     @Override
-    public void arriving(FlightClass flight) {
+    public boolean arriving(FlightClass flight) {
         if (!preventFurtherAction){
             fs.arriving(this);
-            flight.testOutput = ("1");
+            return (true);
         }
         else {
-            flight.testOutput = ("0");
+            return(false);
         }
     }
 
@@ -361,13 +361,13 @@ public class FlightClass implements FlightState{
      * @param flight passes itself, as the state classes need a reference to the variables stored in the flight class
      */
     @Override
-    public void departing(FlightClass flight) {
+    public boolean departing(FlightClass flight) {
         if (!preventFurtherAction){
             fs.departing(this);
-            flight.testOutput = ("1");
+            return true;
         }
         else {
-            flight.testOutput = ("0");
+            return false;
         }
     }
 }

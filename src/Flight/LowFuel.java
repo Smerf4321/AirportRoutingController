@@ -17,11 +17,11 @@ public class LowFuel implements FlightState {
      * @param flight instantiated FlightClass
      */
     @Override
-    public void readyCheck(FlightClass flight) {
+    public boolean readyCheck(FlightClass flight) {
         System.out.println("Refueling");
-        flight.testOutput = ("F");
         flight.refuel();
         flight.setState(new Parked());
+        return true;
         
         //commented out for presentation purposes!
         //the method will automatically call the readyCheck 
@@ -30,11 +30,15 @@ public class LowFuel implements FlightState {
     }
 
     @Override
-    public void arriving(FlightClass flight) {
+    public boolean arriving(FlightClass flight) {
+        System.out.println("Error. Wrong method called.");
+        return false;
     }
 
     @Override
-    public void departing(FlightClass flight) {
+    public boolean departing(FlightClass flight) {
+        System.out.println("Error. Wrong method called.");
+        return false;
     }
     
 }

@@ -153,8 +153,7 @@ public class ParkedTest {
         System.out.println("departing");
         FlightClass flight = new FlightClass(23446, (PassengerPlane)new PassengerPlane("ACQ110", false, "Boeing 747", "Ryanair", 50, 100), 0, 20, false, 40, true, States.INFLIGHT, "London");
         Parked instance = new Parked();
-        instance.departing(flight);
-        assertEquals("1", flight.testOutput);
+        assertTrue(instance.departing(flight));
     }
     
     /**
@@ -166,8 +165,17 @@ public class ParkedTest {
         FlightClass flight = new FlightClass(23446, (PassengerPlane)new PassengerPlane("ACQ110", false, "Boeing 747", "Ryanair", 50, 100), 0, 20, false, 40, true, States.INFLIGHT, "London");
         Parked instance = new Parked();
         Runways.changeRunwayTest();
-        instance.departing(flight);
-        assertEquals("0", flight.testOutput);
+        assertFalse(instance.departing(flight));
     }
     
+    /**
+     * Tests the arriving method, which should return an error
+     */
+    @Test
+    public void testArriving() {
+        System.out.println("arriving");
+        FlightClass flight = new FlightClass(23446, (PassengerPlane)new PassengerPlane("ACQ110", false, "Boeing 747", "Ryanair", 50, 100), 0, 20, false, 40, true, States.INFLIGHT, "London");
+        Parked instance = new Parked();
+        assertFalse(instance.arriving(flight));
+    }
 }

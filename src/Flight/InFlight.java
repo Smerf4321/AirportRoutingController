@@ -20,17 +20,17 @@ public class InFlight implements FlightState {
      * This method checks whether the flight has clearance to land/depart
      * @param flight instantiated FlightClass, should be passed automatically by readyCheck of this class
      */
-    private void clearanceCheck(FlightClass flight) {
+    private boolean clearanceCheck(FlightClass flight) {
         if (flight.getRunway().equals("")) {
             System.out.println("You don't have clearance flight "+ flight.getFlightNumber());
-            flight.testOutput = ("0");
+            return false;
         }
         else {
             flight.giveClearance();
             System.out.println("You have clearance flight " + flight.getFlightNumber());
-            flight.testOutput = ("1");
             Runways.runways.replace(flight.getRunway(), new Boolean (false));
             flight.setState(new Waiting());
+            return true;
         }
     }
 
@@ -39,7 +39,10 @@ public class InFlight implements FlightState {
      * @param flight instantiated FlightClass
      */
     @Override
-    public void readyCheck(FlightClass flight) {}
+    public boolean readyCheck(FlightClass flight) {
+        System.out.println("Error. Wrong method called.");
+        return false;
+    }
     
     /**
      * arriving method override specific for the InFlight class
@@ -48,7 +51,7 @@ public class InFlight implements FlightState {
      * @param flight instantiated FlightClass
      */
     @Override
-    public void arriving(FlightClass flight) {
+    public boolean arriving(FlightClass flight) {
         //Checks for a free runway
         for (Map.Entry r : Runways.runways.entrySet()){
             if (!(Boolean)r.getValue()){
@@ -58,7 +61,12 @@ public class InFlight implements FlightState {
             }
         }
         
-        clearanceCheck(flight);
+        if (clearanceCheck(flight)){
+            return true;
+        }
+        else {
+            return false;
+        }
     }
 
     /**
@@ -66,6 +74,8 @@ public class InFlight implements FlightState {
      * @param flight instantiated FlightClass
      */
     @Override
-    public void departing(FlightClass flight) {
+    public boolean departing(FlightClass flight) {
+        System.out.println("Error. Wrong method called.");
+        return false;
     }
 }

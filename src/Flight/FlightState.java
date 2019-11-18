@@ -15,19 +15,19 @@ public interface FlightState {
      * Checks if the plane is ready to depart
      * @param flight instantiated FlightClass 
      */
-    void readyCheck(FlightClass flight);
+    boolean readyCheck(FlightClass flight);
     
     /**
      * A method to be overridden by the classes that implement the interface
      * Checks if the flight has clearance to land
      * @param flight instantiated FlightClass
      */
-    void arriving(FlightClass flight);
+    boolean arriving(FlightClass flight);
     
     /**
      * A method to be overridden by the classes that implement the interface
      * Checks if the flight has clearance to depart
      * @param flight instantiated FlightClass
      */
-    void departing(FlightClass flight);
+    boolean departing(FlightClass flight);
 }

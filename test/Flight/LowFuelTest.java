@@ -46,7 +46,29 @@ public class LowFuelTest {
         System.out.println("readyCheck");
         FlightClass flight = new FlightClass(23446, (PassengerPlane)new PassengerPlane("ACQ110", false, "Boeing 747", "Ryanair", 50, 100), 0, 20, false, 40, true, States.INFLIGHT, "London");
         LowFuel instance = new LowFuel();
-        instance.readyCheck(flight);
-        assertEquals("F",flight.testOutput);
+        assertTrue(instance.readyCheck(flight));
+    }
+    
+    
+    /**
+     * Test of departing method, which should return error
+     */
+    @Test
+    public void testDeparting() {
+        System.out.println("departing");
+        FlightClass flight = new FlightClass(23446, (PassengerPlane)new PassengerPlane("ACQ110", false, "Boeing 747", "Ryanair", 50, 100), 0, 20, false, 40, true, States.INFLIGHT, "London");
+        LowFuel instance = new LowFuel();
+        assertFalse(instance.departing(flight));
+    }
+    
+    /**
+     * Test of arriving method, which should return error
+     */
+    @Test
+    public void testArriving() {
+        System.out.println("arriving");
+        FlightClass flight = new FlightClass(23446, (PassengerPlane)new PassengerPlane("ACQ110", false, "Boeing 747", "Ryanair", 50, 100), 0, 20, false, 40, true, States.INFLIGHT, "London");
+        LowFuel instance = new LowFuel();
+        assertFalse(instance.arriving(flight));
     }
 }

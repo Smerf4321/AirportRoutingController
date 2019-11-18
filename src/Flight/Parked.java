@@ -20,7 +20,7 @@ public class Parked implements FlightState {
      * @param flight instantiated FlightClass
      */
     @Override
-    public void readyCheck(FlightClass flight) {
+    public boolean readyCheck(FlightClass flight) {
         // takes away the clearance as the plane has alreayd landed and parked
         flight.revokeClearance();
         
@@ -34,6 +34,7 @@ public class Parked implements FlightState {
                 System.out.println("Passengers onboard");
                 flight.testOutput = ("PO");
                 flight.setState(new PassengersOnboard());
+                return true;
             }
             
             //if the current fuel is lower than minimum fuel the method will 
@@ -42,6 +43,7 @@ public class Parked implements FlightState {
                 System.out.println("Low Fuel");
                 flight.testOutput = ("F");
                 flight.setState(new LowFuel());
+                return true;
             }
             
             //if the flight is not supplied the method will 
@@ -50,6 +52,7 @@ public class Parked implements FlightState {
                 System.out.println("Low Supplies");
                 flight.testOutput = ("S");
                 flight.setState(new LowSupplies());
+                return true;
             }
             
             //should fire only when the plane is ready to depart e.g. 
@@ -58,6 +61,7 @@ public class Parked implements FlightState {
                 System.out.println("Ready");
                 flight.testOutput = ("1");
                 flight.departing(flight);
+                return true;
             }
         }
         
@@ -71,6 +75,7 @@ public class Parked implements FlightState {
                 System.out.println("Passengere ready to board");
                 flight.testOutput = ("PB");
                 flight.setState(new NoPassengersOnboard());
+                return true;
             }
             
             //if the current fuel is lower than minimum fuel the method will 
@@ -79,6 +84,7 @@ public class Parked implements FlightState {
                 System.out.println("Low Fuel");
                 flight.testOutput = ("F");
                 flight.setState(new LowFuel());
+                return true;
             
              //if the flight is not supplied the method will 
             //change the state of the flight to LowSupplies   
@@ -87,6 +93,7 @@ public class Parked implements FlightState {
                 System.out.println("Low Supplies");
                 flight.testOutput = ("S");
                 flight.setState(new LowSupplies());
+                return true;
             }
             
             //should fire only when the plane is ready to depart e.g. 
@@ -95,8 +102,10 @@ public class Parked implements FlightState {
                 System.out.println("Ready");
                 flight.testOutput = ("1");
                 flight.departing(flight);
+                return true;
             }
         }
+        return false;
     }
 
     /**
@@ -104,32 +113,32 @@ public class Parked implements FlightState {
      * @param flight instantiated FlightClass
      */
     @Override
-    public void arriving(FlightClass flight) {}
+    public boolean arriving(FlightClass flight) {
+        System.out.println("Error. Wrong method called.");
+        return false;
+    }
 
     /**
      * Checks of there are any available runways for the flight
      * @param flight instantiated FlightClass
      */
     @Override
-    public void departing(FlightClass flight) {
+    public boolean departing(FlightClass flight) {
         boolean runwayOpen = false;
         //Checks for a free runway and gives taxing guidance to the flight
         for (Map.Entry r : Runways.runways.entrySet()){
             if (!((Boolean)r.getValue()).booleanValue()){
                 System.out.println("Proceed to " + r.getKey() + " runway");
-                flight.testOutput = ("1");
                 runwayOpen = true;
                 r.setValue(new Boolean(true));
                 flight.setRunway((String)r.getKey());
                 flight.setState(new Waiting());
-                break;
+                return true;
             }
         }
         //in case there are no empty runways
-        if (!runwayOpen){
-            System.out.println("There aren't any empty runways flight  " + flight.getFlightNumber());
-            flight.testOutput = ("0");
-        }
+        System.out.println("There aren't any empty runways flight  " + flight.getFlightNumber());
+        return false;
     }
     
 }

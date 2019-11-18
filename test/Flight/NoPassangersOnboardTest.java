@@ -46,7 +46,28 @@ public class NoPassangersOnboardTest {
         System.out.println("readyCheck");
         FlightClass flight = new FlightClass(23446, (PassengerPlane)new PassengerPlane("ACQ110", false, "Boeing 747", "Ryanair", 50, 100), 0, 20, false, 40, true, States.INFLIGHT, "London");
         NoPassengersOnboard instance = new NoPassengersOnboard();
-        instance.readyCheck(flight);
-        assertEquals("Pe",flight.testOutput);
+        assertTrue(instance.readyCheck(flight));
+    }
+    
+    /**
+     * Test of departing method, which should return error
+     */
+    @Test
+    public void testDeparting() {
+        System.out.println("departing");
+        FlightClass flight = new FlightClass(23446, (PassengerPlane)new PassengerPlane("ACQ110", false, "Boeing 747", "Ryanair", 50, 100), 0, 20, false, 40, true, States.INFLIGHT, "London");
+        NoPassengersOnboard instance = new NoPassengersOnboard();
+        assertFalse(instance.departing(flight));
+    }
+    
+    /**
+     * Test of arriving method, which should return error
+     */
+    @Test
+    public void testArriving() {
+        System.out.println("arriving");
+        FlightClass flight = new FlightClass(23446, (PassengerPlane)new PassengerPlane("ACQ110", false, "Boeing 747", "Ryanair", 50, 100), 0, 20, false, 40, true, States.INFLIGHT, "London");
+        NoPassengersOnboard instance = new NoPassengersOnboard();
+        assertFalse(instance.arriving(flight));
     }
 }
